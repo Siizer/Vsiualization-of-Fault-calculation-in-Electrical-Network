@@ -42,7 +42,7 @@ function createDiagram(svgSingleDiagram) {
       .attr("y", y)
       .attr("dx", dx)
       .attr("dy", dy)
-      .style("font-size", "0.75rem")
+      .style("font-size", "1rem")
       .text(text)
       .attr("id", id + "text")
       .attr("class",balanced ? "Balanced":"Unbalanced");
@@ -54,7 +54,7 @@ function createDiagram(svgSingleDiagram) {
     .attr("y", 30)
     .attr("dx", 20)
     .attr("dy", -10)
-    .style("font-size", "0.75rem")
+    .style("font-size", "1rem")
     .text("Network Characteristics: V = " + Voltage + " kV, S base = " + Sb + " MVA, Z base = " + Z_b + " Ω"+ ", fault at " +distanceToFault + "% of Line L ("+ lineLength + " miles)")
     .attr("id", "Basetext");  
 
