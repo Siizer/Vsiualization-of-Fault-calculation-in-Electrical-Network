@@ -1,0 +1,148 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+  }
+
+  .topMainContainer {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    gap: 0;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  }  
+
+
+  #SingleLine {
+    grid-row-start: 1;
+    grid-row-end: 5;
+    grid-column-start: 1;
+    grid-column-end: 13;
+  }
+
+  .R_X_Diagrams{
+    grid-area: 5 / 1 / -1 / -1;
+  }
+
+  table {
+    /* width: 100%; makes the table take the full width of the div */
+    border-collapse: collapse; /* collapses cell borders */
+  }
+
+  table th, table td {
+      padding: 0px; /* or your preferred padding */
+      text-align: center;
+      margin: 0px;
+      border:none; /* optional border */
+  }
+
+  .scrollable-div {
+    /* height: 100%; or whatever height you want */
+    overflow-y: auto; /* adds vertical scroll when content overflows */
+    display: block;
+  }
+
+  .input-container {
+    align-items: center;
+  }
+
+  .input-container label {
+    text-align: right;
+  }
+  #prev , #next{
+    display: grid;
+    place-items: center;    
+    text-align: center;
+    cursor: pointer;
+    font-size: xxx-large;
+    font-weight: bolder;
+    color: gray;
+  }
+  
+  #svg-container, #divSingleLine {
+    display: flex;
+    width: 100%; /* adjust based on your SVG size */
+    height: 100%;
+    overflow: hidden;
+    justify-content: center;
+    text-align: center;
+    border: none;
+  }
+
+
+  #input-fields, #inputsTopRight,#input-fields1, #inputsTopLeftProtectedLine {
+    display: grid;
+    place-items: center; 
+  }
+
+  .flash {
+    opacity: 1;
+    transition: opacity 0.5s linear;
+    animation: flash-animation 1s infinite;
+    animation-fill-mode: forwards;
+    font-size: 2rem;
+    display: block;
+  }
+  
+  @keyframes flash-animation {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+  }
+
+  .V, .I{
+    cursor: pointer
+  }
+
+  .tooltip {
+    position: absolute;
+    width: 55px;
+    height: 20px;
+    background-color: #fff;
+    border: 1px solid #000;
+  }
+  
+  .tooltipUnderlined {
+    position: absolute;
+    width: 55px;
+    height: 20px;
+    text-decoration: underline;
+    background-color: #fff;
+    border: 1px solid #000;
+  }
+
+  .button-container {
+    perspective: 600px;
+  }
+
+  #toggleButton {
+    border: none;
+    width: auto;
+    height: auto;
+    background-color: #ccc;
+    border-radius: 5px; /* slightly rounded corners */
+    cursor: pointer;
+    outline: none;
+    font-size: 0.8rem;
+    color: white;
+    transition: transform 0.3s, background-color 0.3s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* subtle shadow for more depth */
+  }
+
+  #toggleButton:hover{
+    background-color: #615454;
+  }
+
+  #toggleButton.on {
+    background-color: rgb(45, 201, 45);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  #toggleButton.on:hover {
+    background-color: rgb(24, 129, 24);
+  }  
+  #pathFaultStrike {
+    cursor:pointer;
+  }
