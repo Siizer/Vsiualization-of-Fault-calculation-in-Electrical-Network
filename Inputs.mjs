@@ -5,7 +5,7 @@ export function Inputs (SelectInputFieldsID,classForTable,SelectInputFieldsClass
 
     const inputDiv = d3.select(SelectInputFieldsID);
     const table = inputDiv.append("table").attr("class",classForTable);
-    table.style('font-size', '0.8rem');
+    table.style('font-size', '1rem');
     // Create table header
     const header = table.append("thead").append("tr");
     // Create a button in the first header cell
@@ -33,7 +33,7 @@ export function Inputs (SelectInputFieldsID,classForTable,SelectInputFieldsClass
     inputFields.append("td")
       .text(d => `${d.key}: `)
       .attr("class",d => d.key.charAt(0))
-      .style('font-size', '0.8rem')
+      .style('font-size', '1rem')
       .on("mouseenter", function(d) {
         // Create tooltip element
         const tooltip = d3.selectAll(".CurrentAndVoltageTable")
@@ -63,7 +63,7 @@ export function Inputs (SelectInputFieldsID,classForTable,SelectInputFieldsClass
       .style("width", "50px")
       .attr("type", "number")
       .attr("step", "0.01")
-      .style('font-size', '0.8rem')
+      .style('font-size', '1rem')
       .attr("value", d => d.value.x.toFixed(3))
       .attr("placeholder", "x")
       .attr("id", d => `${d.key}-real`)
@@ -85,7 +85,7 @@ export function Inputs (SelectInputFieldsID,classForTable,SelectInputFieldsClass
       .style("width", "50px")
       .attr("type", "number")
       .attr("step", "0.01")
-      .style('font-size', '0.8rem')
+      .style('font-size', '1rem')
       .attr("value", d => d.value.y.toFixed(3))
       .attr("placeholder", "y")
       .attr("id", d => `${d.key}-imaginary`)
@@ -108,7 +108,7 @@ export function InputsTopLeft (SelectInputFieldsID,classForTable,SelectInputFiel
 
   const inputDiv = d3.select(SelectInputFieldsID);
   const table = inputDiv.append("table").attr("class",classForTable);
-  table.style('font-size', '0.8rem');
+  table.style('font-size', '1rem');
     // Create table body
   const tbody = table.append("tbody");
   
@@ -137,7 +137,7 @@ export function InputsTopLeft (SelectInputFieldsID,classForTable,SelectInputFiel
     .attr("value", d => d.value.x.toFixed(2))
     .attr("id", d => `${d.key}-real`)
     .attr("class",d => d.key)
-    .style('font-size', '0.8rem')
+    .style('font-size', '1rem')
     .style("text-align","end")
     .on("input", onInputChanged)
     .on("change", onInputChanged);
