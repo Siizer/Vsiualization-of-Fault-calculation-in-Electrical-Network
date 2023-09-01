@@ -34,7 +34,7 @@ vectors.append("text")
     .attr("y", d => yScale(d.value.y))
     .attr("dx", 5)
     .attr("dy", -5)
-    .style("font-size", "12px")
+    .style("font-size", "1rem")
     .style("font-weight", "bold")
     .style("fill", d => colors[d.key.charAt(1)])
     .text(d => `${d.key} ${Math.sqrt(d.value.x * d.value.x + d.value.y * d.value.y).toFixed(1)}/${(Math.atan2(d.value.y, d.value.x) * 180 / Math.PI).toFixed(0)}°`);
