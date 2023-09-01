@@ -450,14 +450,15 @@ function dragstarted(event, d) {
 }
 function dragended(event, d) {
   var max = Number.NEGATIVE_INFINITY;
-
-  for (var key in vectorsData) {
-    var vector = vectorsData[key];
-    if (key.includes("A","B","C")){
-    var magnitude = Math.max(Math.abs(vector.x), Math.abs(vector.y));
-    }
-    max = Math.max(max, magnitude);
-  }
+  var whichPhas = event.subject.key.charAt(1)
+  var allPhases = ["A","B","C"]
+  for (let i = 0; i < 3; i++) {
+    var magnitude = Math.max( Math.abs(vectorsData["I"+allPhases[i]].x), Math.abs(vectorsData["I"+allPhases[i]].y),
+                              Math.abs(vectorsData["V"+allPhases[i]].x), Math.abs(vectorsData["V"+allPhases[i]].y),
+                              Math.abs(vectorsData["Z"+allPhases[i]].x), Math.abs(vectorsData["Z"+allPhases[i]].y));
+    console.log("mag",magnitude);
+    max = Math.max(max, magnitude);}
+  
   maxStatus = max;
   xScale.domain([-max, max]); // new maximum domain value is now 200
   yScale.domain([-max, max]);
