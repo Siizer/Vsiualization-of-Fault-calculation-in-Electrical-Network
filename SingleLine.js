@@ -55,7 +55,7 @@ function createDiagram(svgSingleDiagram) {
     .attr("dx", 20)
     .attr("dy", -10)
     .style("font-size", "1rem")
-    .text("Network Characteristics: V = " + Voltage + " kV, S base = " + Sb + " MVA, Z base = " + Z_b + " Ω"+ ", fault at " +distanceToFault + "% of Line L ("+ lineLength + " miles)")
+    .text("Network Characteristics: V = " + Voltage.toFixed(1) + " kV, S base = " + Sb.toFixed(1) + " MVA, Z base = " + Z_b.toFixed(2) + " Ω"+ ", fault at " +distanceToFault.toFixed(2) + "% of Line L ("+ lineLength.toFixed(2) + " miles)")
     .attr("id", "Basetext");  
 
   svgSingleDiagram.attr("viewBox", "0 0 "+ document.getElementById("svgSingleDiagram_id").clientWidth*1.09+ " " + document.getElementById("svgSingleDiagram_id").clientHeight*1.09);
