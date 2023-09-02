@@ -80,7 +80,10 @@ var listenTo3Ph = document.getElementById("faultType3Ph");
 var listenTo2Ph = document.getElementById("faultType2Ph");
 var listenTo1Ph = document.getElementById("faultType1Ph");
 
-listenTo3Ph.addEventListener("click",function(){console.log(("here here3ph"));
+listenTo3Ph.addEventListener("click",function(){
+  console.log("%cThis is %ca styled %cmessage.", "color: blue;", "font-size: 20px;", "font-weight: bold;");
+
+  console.log(`%chere here3ph %c${h}`,"color:red;","background-color:blue;");
 d3.selectAll("#svgSingleDiagram_g_id>text.Unbalanced").style("display","none");
 d3.selectAll("#svgSingleDiagram_g_id>text.Balanced").style("display","block");
 var inputsUnbalanced =  Array.from(document.getElementsByClassName('Unbalanced'));
@@ -122,7 +125,7 @@ numberInput.addEventListener('change', function() {
     let ZLImaginary = document.getElementById("ZL-imaginary");
     ZLImaginary.value=Z_L1.y; 
     Z_b=Voltage*Voltage/Sb;
-    d3.select("#Basetext")._groups[0][0].innerHTML = "Network Characteristics: V = " + Voltage.toFixed(1) + " kV, S base = " + Sb.toFixed(1) + " MVA, Z base = " + Z_b.toFixed(2) + " Ω"+ ", fault at " + (distanceToFault*100).toFixed(1) + "% of Line L ("+ lineLength.toFixed(2) + " miles)";
+    d3.select("#Basetext")._groups[0][0].innerHTML = "Network Characteristics: V = " + Voltage + " kV, S base = " + Sb + " MVA, Z base = " + Z_b + " Ω"+ ", fault at " +distanceToFault + "% of Line L ("+ lineLength + " miles)";
     
   }; 
   if ("l-real"===numberInput.id) {
@@ -134,6 +137,7 @@ numberInput.addEventListener('change', function() {
     let ZLImaginary = document.getElementById("ZL-imaginary");
     ZLImaginary.value=Z_L1.y; 
     d3.select("#Basetext")._groups[0][0].innerHTML = "Network Characteristics: V = " + Voltage.toFixed(1) + " kV, S base = " + Sb.toFixed(1) + " MVA, Z base = " + Z_b.toFixed(2) + " Ω"+ ", fault at " + (distanceToFault*100).toFixed(1) + "% of Line L ("+ lineLength.toFixed(2) + " miles)";
+  }; 
   if ("Sb-real"===numberInput.id) {
     Sb = parseFloat(numberInput.value);
     Z_L1.x =lineLength*Z1x/(Voltage*Voltage/Sb);
@@ -281,7 +285,7 @@ var dragFault = d3.drag()
       document.getElementById("Per100-real").value=(distanceToFault*100).toFixed(2);
       h = {x:distanceToFault,y:0}; I_h = {x:1-distanceToFault,y:0};
       console.log("h",h);
-      d3.select("#Basetext")._groups[0][0].innerHTML = "Network Characteristics: V = " + Voltage + " kV, S base = " + Sb + " MVA, Z base = " + Z_b + " Ω"+ ", fault at " + (distanceToFault*100).toFixed(1) + "% of Line L ("+ lineLength + " miles)";      
+      d3.select("#Basetext")._groups[0][0].innerHTML = "Network Characteristics: V = " + Voltage.toFixed(1) + " kV, S base = " + Sb.toFixed(1) + " MVA, Z base = " + Z_b.toFixed(2) + " Ω"+ ", fault at " + (distanceToFault*100).toFixed(1) + "% of Line L ("+ lineLength.toFixed(2) + " miles)";      
       CL_.Fault_Type("./"+ checkedValue +"Fault_at_F.mjs",checkedValue);
   });
 
