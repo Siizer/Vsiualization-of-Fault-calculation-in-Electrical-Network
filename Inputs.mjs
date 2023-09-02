@@ -5,13 +5,13 @@ export function Inputs (SelectInputFieldsID,classForTable,SelectInputFieldsClass
 
     const inputDiv = d3.select(SelectInputFieldsID);
     const table = inputDiv.append("table").attr("class",classForTable);
-    table.style('font-size', '1rem');
+    table.style('font-size', '0.8rem');
     // Create table header
     const header = table.append("thead").append("tr");
     // Create a button in the first header cell
     header.append("th")
     .append("button")
-    .text("R/X")
+    .text("R/X").style('font-size', '0.8rem')
     .attr("class", "myButtonCurrentAndVoltagePanel") // optional: add a class for styling
     .on("click", function() {
       let tableToHide = document.getElementsByClassName(classForTable);
