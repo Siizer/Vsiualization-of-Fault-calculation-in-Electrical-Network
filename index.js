@@ -136,7 +136,7 @@ numberInput.addEventListener('change', function() {
     Z_L1.y =lineLength*Z1y/Z_b;
     let ZLImaginary = document.getElementById("ZL-imaginary");
     ZLImaginary.value=Z_L1.y; 
-    d3.select("#Basetext")._groups[0][0].innerHTML = "Network Characteristics: V = " + Voltage.toFixed(1) + " kV, S base = " + Sb.toFixed(1) + " MVA, Z base = " + Z_b.toFixed(2) + " Ω"+ ", fault at " + (distanceToFault*100).toFixed(1) + "% of Line L ("+ lineLength.toFixed(2) + " miles)";
+    d3.select("#Basetext")._groups[0][0].innerHTML = "Network Characteristics: V = " + Voltage.toFixed(1) + " kV, S base = " + Sb.toFixed(1) + " MVA, Z base = " + Z_b.toFixed(2) + " Ω"+ ", fault at " + (distanceToFault).toFixed(1) + "% of Line L ("+ lineLength.toFixed(2) + " miles)";
   }; 
   if ("Sb-real"===numberInput.id) {
     Sb = parseFloat(numberInput.value);
@@ -147,7 +147,7 @@ numberInput.addEventListener('change', function() {
     let ZLImaginary = document.getElementById("ZL-imaginary");
     ZLImaginary.value=Z_L1.y;   
     Z_b=Voltage*Voltage/Sb;
-    d3.select("#Basetext")._groups[0][0].innerHTML = "Network Characteristics: V = " + Voltage.toFixed(1) + " kV, S base = " + Sb.toFixed(1) + " MVA, Z base = " + Z_b.toFixed(2) + " Ω"+ ", fault at " + (distanceToFault*100).toFixed(1) + "% of Line L ("+ lineLength.toFixed(2) + " miles)";
+    d3.select("#Basetext")._groups[0][0].innerHTML = "Network Characteristics: V = " + Voltage.toFixed(1) + " kV, S base = " + Sb.toFixed(1) + " MVA, Z base = " + Z_b.toFixed(2) + " Ω"+ ", fault at " + (distanceToFault).toFixed(1) + "% of Line L ("+ lineLength.toFixed(2) + " miles)";
   };
   if ("Per100-real"===numberInput.id) {
     var minX = LeftBusPosition -0.5;
@@ -156,7 +156,7 @@ numberInput.addEventListener('change', function() {
      console.log("distancetofautl",distanceToFault);
      h = {x:distanceToFault/100,y:0}; I_h = {x:1-distanceToFault/100,y:0};
     d3.select("#pathFaultStrike").attr("transform", "translate(" + (distanceToFault/100 * (maxX - minX) + minX) + "," + (Line_L_Position -7.5) + ") scale(1,2.35)");
-    d3.select("#Basetext")._groups[0][0].innerHTML = "Network Characteristics: V = " + Voltage.toFixed(1) + " kV, S base = " + Sb.toFixed(1) + " MVA, Z base = " + Z_b.toFixed(2) + " Ω"+ ", fault at " + (distanceToFault*100).toFixed(1) + "% of Line L ("+ lineLength.toFixed(2) + " miles)";
+    d3.select("#Basetext")._groups[0][0].innerHTML = "Network Characteristics: V = " + Voltage.toFixed(1) + " kV, S base = " + Sb.toFixed(1) + " MVA, Z base = " + Z_b.toFixed(2) + " Ω"+ ", fault at " + (distanceToFault).toFixed(1) + "% of Line L ("+ lineLength.toFixed(2) + " miles)";
   };
   if ("Z1l-real"===numberInput.id) {
     Z1x = parseFloat(numberInput.value);
