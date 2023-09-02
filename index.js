@@ -96,7 +96,7 @@ listenTo2Ph.addEventListener("click",function(){console.log(("here here 2ph"));
 d3.selectAll("#svgSingleDiagram_g_id>text.Unbalanced").style("display","block");
 d3.selectAll("#svgSingleDiagram_g_id>text.Balanced").style("display","block");
 var inputsUnbalanced =  Array.from(document.getElementsByClassName('Unbalanced'));
-inputsUnbalanced.forEach(function(i){ i.style.color="black";i.readOnly=false;})
+inputsUnbalanced.forEach(function(i){ i.style.color="black";i.readOnly=false;i.style.cursor="auto";})
       var inputsBalanced =  Array.from(document.getElementsByClassName('Balanced'));
       inputsBalanced.forEach(function(i){ i.style.color="black";i.readOnly=false;})
 })
@@ -105,7 +105,7 @@ listenTo1Ph.addEventListener("click",function(){console.log(("here here 1ph"));
 d3.selectAll("#svgSingleDiagram_g_id>text.Unbalanced").style("display","block");
 d3.selectAll("#svgSingleDiagram_g_id>text.Balanced").style("display","block");
 var inputsUnbalanced =  Array.from(document.getElementsByClassName('Unbalanced'));
-inputsUnbalanced.forEach(function(i){ i.style.color="black";i.readOnly=false;})
+inputsUnbalanced.forEach(function(i){ i.style.color="black";i.readOnly=false;i.style.cursor="auto";})
       var inputsBalanced =  Array.from(document.getElementsByClassName('Balanced'));
       inputsBalanced.forEach(function(i){ i.style.color="black";i.readOnly=false;})
 })
@@ -308,11 +308,6 @@ var inputDiv1 = I_.Inputs(
   ],
   onInputChanged
 );
-
-d3.selectAll(".Z")
-  .attr("readonly", true)
-  // .style("pointer-events", "none")
-  .style("cursor", "not-allowed");
 
 var inputDiv = I_.Inputs(
   "#input-fields",
