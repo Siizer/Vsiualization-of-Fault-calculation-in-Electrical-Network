@@ -34,22 +34,24 @@ export function Inputs (SelectInputFieldsID,classForTable,SelectInputFieldsClass
       .text(d => `${d.key}: `)
       .attr("class",d => d.key.charAt(0))
       .style('font-size', '1rem')
-      .on("mouseenter", function(d) {
+      .on("mouseenter", function(event,d) {
+      let elementReal =document.getElementById(d.key+"-real")
+      let elementImaginary =document.getElementById(d.key+"-imaginary")
+      let boundingBoxReal = elementReal.getBoundingClientRect()
+      let boundingBoxImaginary = elementImaginary.getBoundingClientRect()
+      console.log("boundingreal",boundingBoxReal);
         // Create tooltip element
         const tooltip = d3.selectAll(".CurrentAndVoltageTable")
           .append("div")
-          .text(` ${convertToPolar(d.target.__data__.value,true).magnitude.toFixed(2)} `)
+          .text(` ${ convertToPolar(d.value, true).magnitude.toFixed(2)} `)
           .attr("class", "tooltip")
         const tooltipUnderlined = d3.selectAll(".CurrentAndVoltageTable")
           .append("div")
-          .text(` ${underlinedSlash}${convertToPolar(d.target.__data__.value,true).angle.toFixed(1)} `)
+          .text(` ${" " + underlinedSlash}${convertToPolar(d.value,true).angle.toFixed(1)} `)
           .attr("class", "tooltipUnderlined");
           
-          let find_X_ValueOfRealInput = document.getElementById("VA-real");          
-          let find_X_ValueOfRealInputForUnderlined = document.getElementById("VA-imaginary");
-        const [mouseX, mouseY] = d3.pointer(event,".CurrentAndVoltageTable");
-        tooltip.style("left",find_X_ValueOfRealInput.getBoundingClientRect().x + "px").style("top", mouseY + "px");
-        tooltipUnderlined.style("left",find_X_ValueOfRealInputForUnderlined.getBoundingClientRect().x + "px").style("top", mouseY + "px");
+        tooltip.style("left",boundingBoxReal.x  + "px").style("top", boundingBoxReal.y + "px").style("height",boundingBoxReal.height + "px").style("width",boundingBoxReal.width + "px");
+        tooltipUnderlined.style("left",boundingBoxImaginary.x + "px").style("top", boundingBoxImaginary.y + "px").style("height",boundingBoxImaginary.height + "px").style("width",boundingBoxImaginary.width + "px");
       })
       .on("mouseout", function() {
         // Remove the tooltip element when the mouse is no longer over the element
