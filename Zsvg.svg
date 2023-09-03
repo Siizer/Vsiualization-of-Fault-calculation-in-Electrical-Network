@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="209.0377472089315" height="227.72780502392345" viewBox="165.616692583732 92.80143540669854 209.0377472089315 227.72780502392345" xml:space="preserve">
+<defs>
+</defs>
+<g transform="matrix(2.605 0 0 2.605 270.1355661882 215.5103668262)" id="circleMho"  >
+<path style="stroke: rgb(0,0,0); stroke-width: 4; fill: none; opacity: 1;"  transform=" translate(0, 0)" d="M 0 -39.87241 C 22.00957 -39.87241 39.87241 -22.009570000000004 39.87241 0 C 39.87241 22.00957 22.009570000000004 39.87241 0 39.87241 C -22.00957 39.87241 -39.87241 22.009570000000004 -39.87241 0 C -39.87241 -22.00957 -22.009570000000004 -39.87241 0 -39.87241 z" stroke-linecap="round" />
+</g>
+<g transform="matrix(0.7079824526 0 0 1 270.1355661882 296.9481658692)" id="lineHorizontal"  >
+<path style="stroke: rgb(0,0,0); stroke-width: 10; fill: none; opacity: 1;"  transform=" translate(0, 0)" d="M -147.12919 0 L 147.12918000000002 0" stroke-linecap="round" />
+</g>
+<g transform="matrix(0.1415912226 0 0 0.1415912226 204.0454545455 98.5358799228)" id="verticalArrow"  >
+<path style="stroke: rgb(0,0,0); stroke-width: 10; fill: none; opacity: 1;"  transform=" translate(-40, -40)" d="M 60 40 L 80 80 L 40 80 L 0 80 L 20 40 L 40 0 L 60 40 z" stroke-linecap="round" />
+</g>
+<g transform="matrix(0 0.1415912226 -0.1415912226 0 368.9199952774 297.4481658692)" id="horizontalArrow"  >
+<path style="stroke: rgb(0,0,0); stroke-width: 10; fill: none; opacity: 1;"  transform=" translate(-40, -40)" d="M 60 40 L 80 80 L 40 80 L 0 80 L 20 40 L 40 0 L 60 40 z" stroke-linecap="round" />
+</g>
+<g transform="matrix(1 0 0 0.982792482 204.5454545455 206.6653379187)" id="lineVertical"  >
+<path style="stroke: rgb(0,0,0); stroke-width: 10; fill: none; opacity: 1;"  transform=" translate(0, 0)" d="M 0 115.35752 L 0 -115.35753" stroke-linecap="round" />
+</g>
+<g transform="matrix(1 0 0 1 235.3494848485 200.1594896332)" id="lineProtected"  >
+<path style="stroke: rgb(0,0,0); stroke-width: 10; fill: none; opacity: 1;"  transform=" translate(0, 0)" d="M -33.89155 106.85805 L 33.89154 -106.85805999999998" />
+</g>
+</svg>
