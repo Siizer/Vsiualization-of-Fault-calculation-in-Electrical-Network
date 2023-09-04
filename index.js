@@ -356,7 +356,7 @@ export function onInputChanged(event, d) {
   updateImpedances(vectorsData, d.key);
   vectorsData[d.key].x = d.value.x;
   vectorsData[d.key].y = d.value.y;
-  if (["A", "B", "C"].includes(d.key)){ 
+  if (["A", "B", "C"].includes(d.key.charAt(1))){ 
   const z = C_.complexDivision(
     vectorsData["V" + d.key.charAt(1)],
     vectorsData["I" + d.key.charAt(1)]
@@ -369,15 +369,17 @@ export function onInputChanged(event, d) {
   vectorsData["Z" + d.key.charAt(1)].y = z.y;
   calculateSequenceImpedances(vectorsData);
   var max = Number.NEGATIVE_INFINITY;
+	  
+  var allPhases = ["A","B","C"]
+  for (let i = 0; i < 3; i++) {
+    var magnitude = Math.max( Math.abs(vectorsData["I"+allPhases[i]].x), Math.abs(vectorsData["I"+allPhases[i]].y),
+                              Math.abs(vectorsData["V"+allPhases[i]].x), Math.abs(vectorsData["V"+allPhases[i]].y),
+                              Math.abs(vectorsData["Z"+allPhases[i]].x), Math.abs(vectorsData["Z"+allPhases[i]].y));
 
-  for (var key in vectorsData) {
-    var vector = vectorsData[key];
-    var magnitude = Math.max(Math.abs(vector.x), Math.abs(vector.y));
-    max = Math.max(max, magnitude);
-  }
-
-
-  xScale.domain([-max, max]); // new maximum domain value is now 200
+    max = Math.max(max, magnitude);}
+  
+  maxStatus = max;
+  xScale.domain([-max, max]);
   yScale.domain([-max, max]);
   mainGroup
     .select(".x-axis") // select your axis again
