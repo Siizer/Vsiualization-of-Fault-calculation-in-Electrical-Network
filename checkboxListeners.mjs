@@ -93,11 +93,18 @@ export function updateAxis(inputs) {
 export function Fault_Type (mjs,checkedValue){
   if (toggleButtonValue==="ON") {
     import(mjs).then(function (module) {
-    let objectCopyFault;let arrayFunctions=[ThreePhaseFault(),Ph_Ph(),Ph_G()];let index=-1;
+    let objectCopyFault;
+    let arrayFunctions=[
+      ThreePhaseFault(),
+      Ph_Ph(),
+      Ph_G()
+      ];
+    let index=-1;
+
     if (checkedValue==="3Ph") {objectCopyFault = module.ThreePhaseFault();index=0;} 
     if (checkedValue==="2Ph") {objectCopyFault = module.Ph_Ph();index=1;} 
     if (checkedValue==="1Ph") {objectCopyFault = module.Ph_G();index=2;} 
-  
+
 
       let selectAll_I_V_input = document.querySelectorAll(
         "input.Z, input.I, input.V"
@@ -109,7 +116,7 @@ export function Fault_Type (mjs,checkedValue){
 
       function dataToHTMLTable(data) {
         // Start with the table header
-        let tableHTML = '<table border="1">';
+        let tableHTML = '<table border="1px" style="border-collapse:unset; padding:2px 0px 2px 0px;font-size:0.8rem;">';
   
         // Extract headers (object keys) from the first data entry
         const headers = Object.keys(data[0]);
@@ -131,56 +138,96 @@ export function Fault_Type (mjs,checkedValue){
         tableHTML += '</tbody></table>';
   
         return tableHTML;
+      }
+
+    const fieldSet = function(id,label,array,keys,cartesianFaultApply){ 
+      const fieldset = document.getElementById(id);
+      let data = []
+      if (cartesianFaultApply){
+       data = [
+        {V: label[0] ,R: (array[keys[0]].x).toFixed(2), X:  (array[keys[0]].y)<0 ? "- j "+ (-array[keys[0]].y).toFixed(2) : "+ j " + (array[keys[0]].y).toFixed(2)},
+        {V: label[1] ,R: (array[keys[1]].x).toFixed(2), X:  (array[keys[1]].y)<0 ? "- j "+ (-array[keys[1]].y).toFixed(2) : "+ j " + (array[keys[1]].y).toFixed(2)},
+        {V: label[2] ,R: (array[keys[2]].x).toFixed(2), X:  (array[keys[2]].y)<0 ? "- j "+ (-array[keys[2]].y).toFixed(2) : "+ j " + (array[keys[2]].y).toFixed(2)}
+      ]}
+      else{
+        data = [
+          {V: label[0] ,R: "&nbsp;" + (convertToPolar(array[keys[0]],true).magnitude).toFixed(2), X:  `<u>${"&nbsp;" + "&frasl;" + (convertToPolar(array[keys[0]],true).angle <0 ? "-" : "+") + Math.abs((convertToPolar(array[keys[0]],true).angle)).toFixed(1) + "º"}</u>`},
+          {V: label[1] ,R: "&nbsp;" + (convertToPolar(array[keys[1]],true).magnitude).toFixed(2), X:  `<u>${"&nbsp;" + "&frasl;" + (convertToPolar(array[keys[1]],true).angle <0 ? "-" : "+") +  Math.abs((convertToPolar(array[keys[1]],true).angle)).toFixed(1) + "º"}</u>`},
+          {V: label[2] ,R: "&nbsp;" + (convertToPolar(array[keys[2]],true).magnitude).toFixed(2), X:  `<u>${"&nbsp;" + "&frasl;" + (convertToPolar(array[keys[2]],true).angle <0 ? "-" : "+") + Math.abs((convertToPolar(array[keys[2]],true).angle)).toFixed(1) + "º"}</u>`}
+        ]        
+      };
+      
+      const tableHTML = dataToHTMLTable(data);
+
+     var tableOutput = document.getElementById(id)
+     tableOutput.innerHTML = tableHTML;
+     
+
     }
-  
-    const fieldset_V = document.getElementById('faultCalculationResult_V');
-  
-    const data_V = [
-      {V: "Va = " ,R: (arrayFunctions[index].Vaat_R.x).toFixed(2), X:  (arrayFunctions[index].Vaat_R.y)<0 ? "- j "+ (-arrayFunctions[index].Vaat_R.y).toFixed(2) : "+ j " + (arrayFunctions[index].Vaat_R.y).toFixed(2)},
-      {V: "Vb = " ,R: (arrayFunctions[index].Vbat_R.x).toFixed(2), X:  (arrayFunctions[index].Vbat_R.y)<0 ? "- j "+ (-arrayFunctions[index].Vbat_R.y).toFixed(2) : "+ j " + (arrayFunctions[index].Vbat_R.y).toFixed(2)},
-      {V: "Vc = " ,R: (arrayFunctions[index].Vcat_R.x).toFixed(2), X:  (arrayFunctions[index].Vcat_R.y)<0 ? "- j "+ (-arrayFunctions[index].Vcat_R.y).toFixed(2) : "+ j " + (arrayFunctions[index].Vcat_R.y).toFixed(2)}
-    ];
+
+
+    let faultInput3Ph = document.getElementById('faultType3Ph');
+    faultInput3Ph.addEventListener('click', function() {
+            Fault_Type("./3PhFault_at_F.mjs","3Ph");
+        })
+    let faultInput2Ph = document.getElementById('faultType2Ph');
+    faultInput2Ph.addEventListener('click', function() {
+            Fault_Type("./2PhFault_at_F.mjs","2Ph");
+        })
+    let faultInput1Ph = document.getElementById('faultType1Ph');
+    faultInput1Ph.addEventListener('click', function() {
+            Fault_Type("./1PhFault_at_F.mjs","1Ph");
+        })
     
-    const tableHTML_V = dataToHTMLTable(data_V);
-  
-    document.getElementById('faultCalculationResult_V').innerHTML = tableHTML_V;
-  
-    const fieldset_I = document.getElementById('faultCalculationResult_I');
-  
-    const data_I = [
-      {I: "Ia = " ,R: (arrayFunctions[index].Iaat_R.x).toFixed(2), X:  (arrayFunctions[index].Iaat_R.y)<0 ? "- j "+ (-arrayFunctions[index].Iaat_R.y).toFixed(2) : "+ j " + (arrayFunctions[index].Iaat_R.y).toFixed(2)},
-      {I: "Ib = " ,R: (arrayFunctions[index].Ibat_R.x).toFixed(2), X:  (arrayFunctions[index].Ibat_R.y)<0 ? "- j "+ (-arrayFunctions[index].Ibat_R.y).toFixed(2) : "+ j " + (arrayFunctions[index].Ibat_R.y).toFixed(2)},
-      {I: "Ic = " ,R: (arrayFunctions[index].Icat_R.x).toFixed(2), X:  (arrayFunctions[index].Icat_R.y)<0 ? "- j "+ (-arrayFunctions[index].Icat_R.y).toFixed(2) : "+ j " + (arrayFunctions[index].Icat_R.y).toFixed(2)}
-    ];
+
+    let toggleDisplayValues = document.getElementById("toggleDisplayValues");
+
+    function setDashboardText(text) {
+      document.getElementById("toggleDisplayValues").innerHTML = text;
+    }
+
+
+    toggleDisplayValues.addEventListener("click", function(e) {
+
+      if (cartesianFaultApply) {
+        setDashboardText("r<u>&nbsp;⁄θº</u>"); 
+        console.log("Event listener invoked  r theta",checkedValue);
+
+      // Call setdashboardValues before toggling cartesianFaultApply
+      setdashboardValues(cartesianFaultApply);        
+      } else {
+        setDashboardText("R/X"); 
+        console.log("Event listener invoked R/X",checkedValue);
+        
+      // Call setdashboardValues before toggling cartesianFaultApply
+      setdashboardValues(cartesianFaultApply);        
+      }
     
-    const tableHTML_I = dataToHTMLTable(data_I);
+
+
+    });
+
+  // let toggleDisplayValues = document.getElementById("toggleDisplayValues")
+  // toggleDisplayValues.addEventListener("click",function(){
+  //     const changeToRX = function() {cartesianFaultApply=!cartesianFaultApply;document.getElementById("toggleDisplayValues").innerText="R/X";setdashboardValues(cartesianFaultApply);}
+  //     const changeTorTheta = function() {cartesianFaultApply=!cartesianFaultApply;document.getElementById("toggleDisplayValues").innerHTML="r<u>&nbsp;⁄θº</u>";setdashboardValues(cartesianFaultApply);}
+  //     if (cartesianFaultApply) {console.log("change to R/X");changeTorTheta()}
+  //     else {console.log("change to r theta");changeToRX()};
+  // }) 
   
-    document.getElementById('faultCalculationResult_I').innerHTML = tableHTML_I;
-  
-    const fieldsetZ = document.getElementById('faultCalculationResult_Z');
-  
-    const data_Z = [
-      {Z: "Za = " ,R: (arrayFunctions[index].Zaat_R.x).toFixed(2), X:  (arrayFunctions[index].Zaat_R.y)<0 ? "- j "+ (-arrayFunctions[index].Zaat_R.y).toFixed(2) : "+ j " + (arrayFunctions[index].Zaat_R.y).toFixed(2)},
-      {Z: "Zb = " ,R: (arrayFunctions[index].Zbat_R.x).toFixed(2), X:  (arrayFunctions[index].Zbat_R.y)<0 ? "- j "+ (-arrayFunctions[index].Zbat_R.y).toFixed(2) : "+ j " + (arrayFunctions[index].Zbat_R.y).toFixed(2)},
-      {Z: "Zc = " ,R: (arrayFunctions[index].Zcat_R.x).toFixed(2), X:  (arrayFunctions[index].Zcat_R.y)<0 ? "- j "+ (-arrayFunctions[index].Zcat_R.y).toFixed(2) : "+ j " + (arrayFunctions[index].Zcat_R.y).toFixed(2)}
-    ];
-    
-    const tableHTML_Z = dataToHTMLTable(data_Z);
-    document.getElementById('faultCalculationResult_Z').innerHTML = tableHTML_Z;
-  
-    const fieldsetZ_Ph_ph = document.getElementById('faultCalculationResult_Z_Ph_Ph');
-  
-    const data_Z_Ph_Ph = [
-      {Z: "Zab = " ,R: (arrayFunctions[index].Za_bat_R.x).toFixed(2), X:  (arrayFunctions[index].Za_bat_R.y)<0 ? "- j "+ (-arrayFunctions[index].Za_bat_R.y).toFixed(2) : "+ j " + (arrayFunctions[index].Za_bat_R.y).toFixed(2)},
-      {Z: "Zbc = " ,R: (arrayFunctions[index].Zb_cat_R.x).toFixed(2), X:  (arrayFunctions[index].Zb_cat_R.y)<0 ? "- j "+ (-arrayFunctions[index].Zb_cat_R.y).toFixed(2) : "+ j " + (arrayFunctions[index].Zb_cat_R.y).toFixed(2)},
-      {Z: "Zca = " ,R: (arrayFunctions[index].Zc_aat_R.x).toFixed(2), X:  (arrayFunctions[index].Zc_aat_R.y)<0 ? "- j "+ (-arrayFunctions[index].Zc_aat_R.y).toFixed(2) : "+ j " + (arrayFunctions[index].Zc_aat_R.y).toFixed(2)}
-    ];
-    
-    const tableHTML_Z_Ph_Ph = dataToHTMLTable(data_Z_Ph_Ph);
-    document.getElementById('faultCalculationResult_Z_Ph_Ph').innerHTML = tableHTML_Z_Ph_Ph;
-  
-    const fieldsetZ_Transition = document.getElementById('faultCalculationResult_Transition');
-  
+  function setdashboardValues(cartesionTrue){
+  fieldSet('faultCalculationResult_V',["Va = ","Vb = ","Vc = "],arrayFunctions[index],["Vaat_R","Vbat_R","Vcat_R"],cartesionTrue)    
+  fieldSet('faultCalculationResult_VPh',["Vab = ","Vbc = ","Vca = "],arrayFunctions[index],["Va_bat_R","Vb_cat_R","Vc_aat_R"],cartesionTrue)    
+  fieldSet('faultCalculationResult_I',["Ia = ","Ib = ","Ic = "],arrayFunctions[index],["Iaat_R","Ibat_R","Icat_R"],cartesionTrue)    
+  fieldSet('faultCalculationResult_IPh',["Iab = ","Ibc = ","Ica = "],arrayFunctions[index],["Ia_bat_R","Ib_cat_R","Ic_aat_R"],cartesionTrue)    
+  fieldSet('faultCalculationResult_Z',["Za = ","Zb = ","Zc = "],arrayFunctions[index],["Zaat_R","Zbat_R","Zcat_R"],cartesionTrue)    
+  fieldSet('faultCalculationResult_Z_Ph_Ph',["Zab = ","Zbc = ","Zca = "],arrayFunctions[index],["Za_bat_R","Zb_cat_R","Zc_aat_R"],cartesionTrue)    
+  fieldSet('faultCalculationResult_Z_Ph_Ph',["Zab = ","Zbc = ","Zca = "],arrayFunctions[index],["Za_bat_R","Zb_cat_R","Zc_aat_R"],cartesionTrue) 
+      // Toggle cartesianFaultApply
+      cartesianFaultApply = !cartesianFaultApply;  }
+ 
+  setdashboardValues(cartesianFaultApply)
+
     const data_Transition = [
       {Z: "Zab = " ,R: convertToPolar(complexMultiplication(h,Z_L1),true).magnitude.toFixed(4)+"/"+convertToPolar(complexMultiplication(h,Z_L1),true).angle.toFixed(2)+ " + ", X:convertToPolar(complexMultiplication(complexDivision(_a,C1),Z_F),true).magnitude.toFixed(4)+"/"+convertToPolar(complexMultiplication(complexDivision(_a,C1),Z_F),true).angle.toFixed(2)+ " + ", Y:convertToPolar(complexMultiplication(complexDivision({x:0,y:-Math.sqrt(3)},C1),Z2),true).magnitude.toFixed(4)+"/"+convertToPolar(complexMultiplication(complexDivision({x:0,y:-Math.sqrt(3)},C1),Z2),true).angle.toFixed(2)},
       {Z: "Zbc = " ,R: convertToPolar(complexMultiplication(h,Z_L1),true).magnitude.toFixed(4)+"/"+convertToPolar(complexMultiplication(h,Z_L1),true).angle.toFixed(2)+ " + ", X:convertToPolar(complexMultiplication(complexDivision(complexDivision(I,{x:2,y:0}),C1),Z_F),true).magnitude.toFixed(4)+"/"+convertToPolar(complexMultiplication(complexDivision(complexDivision(I,{x:2,y:0}),C1),Z_F),true).angle.toFixed(2), Y: ""},
@@ -189,11 +236,7 @@ export function Fault_Type (mjs,checkedValue){
     
     const tableHTML_Transition = dataToHTMLTable(data_Transition);
     document.getElementById('faultCalculationResult_Transition').innerHTML = tableHTML_Transition;
-    console.log("Zab = checking",
-    complexAdd3(
-      complexMultiplication(h,Z_L1),
-      complexMultiplication(complexDivision(_a,C1),Z_F),
-      complexMultiplication(complexDivision({x:0,y:-Math.sqrt(3)},C1),Z2)));
+
     // {Z: "Zbc = " ,R: convertToPolar(complexMultiplication(h,Z_L1),true).magnitude.toFixed(4)+"/"+convertToPolar(complexMultiplication(h,Z_L1),true).angle.toFixed(2)+ " + ", X:convertToPolar(complexMultiplication(complexDivision(complexDivision(I,{x:2,y:0}),C1),Z_F),true).magnitude.toFixed(4)+"/"+convertToPolar(complexMultiplication(complexDivision(complexDivision(I,{x:2,y:0}),C1),Z_F),true).angle.toFixed(2), Y: ""},
     // {Z: "Zca = " ,R: convertToPolar(complexMultiplication(h,Z_L1),true).magnitude.toFixed(4)+"/"+convertToPolar(complexMultiplication(h,Z_L1),true).angle.toFixed(2)+ " + ", X:convertToPolar(complexMultiplication(complexDivision(_a2,C1),Z_F),true).magnitude.toFixed(4)+"/"+convertToPolar(complexMultiplication(complexDivision(_a2,C1),Z_F),true).angle.toFixed(2)+ " + ", Y:convertToPolar(complexMultiplication(complexDivision({x:0,y:Math.sqrt(3)},C1),Z2),true).magnitude.toFixed(4)+"/"+convertToPolar(complexMultiplication(complexDivision({x:0,y:Math.sqrt(3)},C1),Z2),true).angle.toFixed(2)}
     

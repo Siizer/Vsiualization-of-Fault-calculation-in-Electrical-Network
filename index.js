@@ -81,38 +81,38 @@ var listenTo2Ph = document.getElementById("faultType2Ph");
 var listenTo1Ph = document.getElementById("faultType1Ph");
 
 listenTo3Ph.addEventListener("click",function(){
-  console.log("%cThis is %ca styled %cmessage.", "color: blue;", "font-size: 20px;", "font-weight: bold;");
 
-  console.log(`%chere here3ph %c${h}`,"color:red;","background-color:blue;");
 d3.selectAll("#svgSingleDiagram_g_id>text.Unbalanced").style("display","none");
 d3.selectAll("#svgSingleDiagram_g_id>text.Balanced").style("display","block");
 var inputsUnbalanced =  Array.from(document.getElementsByClassName('Unbalanced'));
 inputsUnbalanced.forEach(function(i){ i.style.color="lightgrey";i.readOnly=true;i.style.cursor="not-allowed";})
 var inputsBalanced =  Array.from(document.getElementsByClassName('Balanced'));
-inputsBalanced.forEach(function(i){ i.style.color="black";i.readOnly=false;})
+inputsBalanced.forEach(function(i){ i.style.color="black";i.readOnly=false;});
+CL_.Fault_Type("./3PhFault_at_F.mjs","3Ph");
 })
 
-listenTo2Ph.addEventListener("click",function(){console.log(("here here 2ph"));
+listenTo2Ph.addEventListener("click",function(){
 d3.selectAll("#svgSingleDiagram_g_id>text.Unbalanced").style("display","block");
 d3.selectAll("#svgSingleDiagram_g_id>text.Balanced").style("display","block");
 var inputsUnbalanced =  Array.from(document.getElementsByClassName('Unbalanced'));
 inputsUnbalanced.forEach(function(i){ i.style.color="black";i.readOnly=false;i.style.cursor="auto";})
       var inputsBalanced =  Array.from(document.getElementsByClassName('Balanced'));
-      inputsBalanced.forEach(function(i){ i.style.color="black";i.readOnly=false;})
+      inputsBalanced.forEach(function(i){ i.style.color="black";i.readOnly=false;});
+CL_.Fault_Type("./2PhFault_at_F.mjs","2Ph");
 })
 
-listenTo1Ph.addEventListener("click",function(){console.log(("here here 1ph"));
+listenTo1Ph.addEventListener("click",function(){
 d3.selectAll("#svgSingleDiagram_g_id>text.Unbalanced").style("display","block");
 d3.selectAll("#svgSingleDiagram_g_id>text.Balanced").style("display","block");
 var inputsUnbalanced =  Array.from(document.getElementsByClassName('Unbalanced'));
 inputsUnbalanced.forEach(function(i){ i.style.color="black";i.readOnly=false;i.style.cursor="auto";})
       var inputsBalanced =  Array.from(document.getElementsByClassName('Balanced'));
-      inputsBalanced.forEach(function(i){ i.style.color="black";i.readOnly=false;})
+      inputsBalanced.forEach(function(i){ i.style.color="black";i.readOnly=false;});
+CL_.Fault_Type("./1PhFault_at_F.mjs","1Ph");
 })
-
 
 // Step 1: Select the input element
-var numberInputs = document.querySelectorAll('#l-real, #Sb-real, #Per100-real, #Voltage-real, .VAR, .faultControls, #pathFaultStrike');
+var numberInputs = document.querySelectorAll('#l-real, #Sb-real, #Per100-real, #Voltage-real, .VAR, #pathFaultStrike');
 numberInputs.forEach(function(numberInput,i) {
 
 numberInput.addEventListener('change', function() {
@@ -245,12 +245,14 @@ numberInput.addEventListener('change', function() {
     d3.select("#Estext")._groups[0][0].innerHTML="Es = "+E_F.x+" + j "+E_F.y; };
   if ("Es-imaginary"===numberInput.id) {
     E_F.y = parseFloat(numberInput.value);
-    d3.select("#Estext")._groups[0][0].innerHTML="Es = "+E_F.x+" + j "+E_F.y; };
-    console.log("checkedValue",checkedValue);
-CL_.Fault_Type("./"+ checkedValue +"Fault_at_F.mjs",checkedValue);
- 
+    d3.select("#Estext")._groups[0][0].innerHTML="Es = "+E_F.x+" + j "+E_F.y; };  
+
+    CL_.Fault_Type("./"+ checkedValue +"Fault_at_F.mjs",checkedValue);
+    console.log("to check oninput Change");
 });
 });
+
+
 
 var pathFaultStrike = svgSingleDiagram_g.append("path");
 pathFaultStrike.attr("d", "M10.4154 18.9231L10.8804 16.5981C10.9357 16.3214 10.9634 16.183 10.8884 16.0915C10.8134 16 10.6723 16 10.3901 16H8.8831C8.49157 16 8.2958 16 8.224 15.8732C8.15219 15.7463 8.25291 15.5785 8.45435 15.2428L10.5457 11.7572C10.7471 11.4215 10.8478 11.2537 10.776 11.1268C10.7042 11 10.5084 11 10.1169 11H7.7215C7.39372 11 7.22984 11 7.15527 10.8924C7.0807 10.7848 7.13825 10.6313 7.25334 10.3244L9.87834 3.32444C9.93719 3.1675 9.96661 3.08904 10.0309 3.04452C10.0951 3 10.1789 3 10.3465 3H15.1169C15.5084 3 15.7042 3 15.776 3.12683C15.8478 3.25365 15.7471 3.42152 15.5457 3.75725L13.4543 7.24275C13.2529 7.57848 13.1522 7.74635 13.224 7.87317C13.2958 8 13.4916 8 13.8831 8H15C15.4363 8 15.6545 8 15.7236 8.1382C15.7927 8.27639 15.6618 8.45093 15.4 8.8L13.6 11.2C13.3382 11.5491 13.2073 11.7236 13.2764 11.8618C13.3455 12 13.5637 12 14 12H15.9777C16.4225 12 16.6449 12 16.7134 12.1402C16.782 12.2803 16.6454 12.4559 16.3724 12.807L11.3003 19.3281C10.7859 19.9895 10.5287 20.3202 10.3488 20.2379C10.1689 20.1556 10.2511 19.7447 10.4154 18.9231Z")
@@ -284,9 +286,10 @@ var dragFault = d3.drag()
       distanceToFault = (newX - minX) / (maxX - minX);
       document.getElementById("Per100-real").value=(distanceToFault*100).toFixed(2);
       h = {x:distanceToFault,y:0}; I_h = {x:1-distanceToFault,y:0};
-      console.log("h",h);
+      console.log("h in drag",h);
       d3.select("#Basetext")._groups[0][0].innerHTML = "Network Characteristics: V = " + Voltage.toFixed(1) + " kV, S base = " + Sb.toFixed(1) + " MVA, Z base = " + Z_b.toFixed(2) + " Ω"+ ", fault at " + (distanceToFault*100).toFixed(1) + "% of Line L ("+ lineLength.toFixed(2) + " miles)";      
       CL_.Fault_Type("./"+ checkedValue +"Fault_at_F.mjs",checkedValue);
+      console.log("are we going through drag the fault?");
   });
 
 // Apply the drag behavior to the path
@@ -308,6 +311,11 @@ var inputDiv1 = I_.Inputs(
   ],
   onInputChanged
 );
+
+// d3.selectAll(".Z")
+//   .attr("readonly", true)
+//   // .style("pointer-events", "none")
+//   .style("cursor", "not-allowed");
 
 var inputDiv = I_.Inputs(
   "#input-fields",
@@ -341,9 +349,9 @@ updateInputFields([
 
 // Define input change function
 export function onInputChanged(event, d) {
-  let inputType;
-  const phase = d.key;
-  if (event.target.id.includes("-")){ inputType = event.target.id.split("-")[1];} else {inputType = event.target.id;};
+  let inputType; console.log("are we going through onInputChange?");
+  const phase = d.key; 
+  if (event.target.id.includes("-")){ inputType = event.target.id.split("-")[1];} else {inputType = event.target.id;}; 
   const newValue = parseFloat(event.target.value);
   if (inputType === "real") { 
     vectorsData[phase].x = newValue;
@@ -369,7 +377,7 @@ export function onInputChanged(event, d) {
   vectorsData["Z" + d.key.charAt(1)].y = z.y;
   calculateSequenceImpedances(vectorsData);
   var max = Number.NEGATIVE_INFINITY;
-	  
+
   var allPhases = ["A","B","C"]
   for (let i = 0; i < 3; i++) {
     var magnitude = Math.max( Math.abs(vectorsData["I"+allPhases[i]].x), Math.abs(vectorsData["I"+allPhases[i]].y),
@@ -379,7 +387,7 @@ export function onInputChanged(event, d) {
     max = Math.max(max, magnitude);}
   
   maxStatus = max;
-  xScale.domain([-max, max]);
+  xScale.domain([-max, max]); // new maximum domain value is now 200
   yScale.domain([-max, max]);
   mainGroup
     .select(".x-axis") // select your axis again
@@ -450,7 +458,7 @@ function dragstarted(event, d) {
 }
 function dragended(event, d) {
   var max = Number.NEGATIVE_INFINITY;
-  var whichPhas = event.subject.key.charAt(1)
+  
   var allPhases = ["A","B","C"]
   for (let i = 0; i < 3; i++) {
     var magnitude = Math.max( Math.abs(vectorsData["I"+allPhases[i]].x), Math.abs(vectorsData["I"+allPhases[i]].y),

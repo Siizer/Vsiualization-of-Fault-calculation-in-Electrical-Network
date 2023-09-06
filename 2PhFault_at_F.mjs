@@ -4,11 +4,11 @@ import { PI_to_Y,convertToPolar, convertToCartesian, complexAdd,complexSub, comp
 
 export function Ph_Ph() {
 let Z_L1 = {x:lineLength*Z1x/Z_b,y:lineLength*Z1y/Z_b}; let Z_L2 = {x:lineLength*Z1x/Z_b,y:lineLength*Z1y/Z_b};
-console.log("h",h);
+
             Zl1 = complexDivision(complexMultiplication(Z_U1,Z_S1),complexAdd3(Z_S1,Z_E1,Z_U1));
             Zj1 = complexDivision(complexMultiplication(Z_S1,Z_E1),complexAdd3(Z_S1,Z_E1,Z_U1));
             Zk1 = complexDivision(complexMultiplication(Z_E1,Z_U1),complexAdd3(Z_S1,Z_E1,Z_U1));
-            console.log("zl",convertToPolar(Zl,true),"zj",convertToPolar(Zj,true),"zk",convertToPolar(Zk,true));        
+                 
             Zl2 = complexDivision(complexMultiplication(Z_U2,Z_S2),complexAdd3(Z_S2,Z_E2,Z_U2));
             Zj2 = complexDivision(complexMultiplication(Z_S2,Z_E2),complexAdd3(Z_S2,Z_E2,Z_U2));
             Zk2 = complexDivision(complexMultiplication(Z_E2,Z_U2),complexAdd3(Z_S2,Z_E2,Z_U2));
@@ -20,13 +20,13 @@ Z_M1 = complexAdd(PI_to_Y(Z_S1,Z_E1,Z_U1).Zj,complexMultiplication(h,Z_L1));
 Z_N1 = complexAdd(PI_to_Y(Z_S1,Z_E1,Z_U1).Zk,complexMultiplication(I_h,Z_L1));
 
 // Z1 total impedance
-console.log("ZM1",Z_M1,"ZN1",Z_N1);
+
 Z1 = complexAdd(Zl1,complexDivision(complexMultiplication(Z_M1,Z_N1),complexAdd(Z_M1,Z_N1)));
-console.log("Z1",Z1);
+
 
 C1 = complexDivision(Z_N1,complexAdd(Z_M1,Z_N1));
 
-console.log("C1",C1);
+
 //LEFT BRANCH
 Z_M2 = complexAdd(Zj2,complexMultiplication(h,Z_L2));
 //RIGHT BRANCH
@@ -41,7 +41,6 @@ Z2 = complexAdd(Zl2,complexDivision(complexMultiplication(Z_M2,Z_N2),complexAdd(
 C2 = complexDivision(complexMultiplication(I,Z_N2),complexAdd(Z_M2,Z_N2));
 K = complexDivision(complexAdd3(Z1,Z2,Z_F),E_F);
 
-console.log("K",K);
 
 Z_F1 = complexAdd(Z_F,complexMultiplication3(h,Z_L1,C1));
 
@@ -78,10 +77,10 @@ Vc_aat_F = complexDivision(complexAdd(complexMultiplication(a_I,Z_F),complexMult
 Ia0at_R = complexDivision(complexMultiplication(O,C1),K);
 Ia1at_R = complexDivision(complexMultiplication(I,C1),K);
 Ia2at_R = complexDivision(complexMultiplication(_I,C2),K);
-console.log("a2",a2);
-Iaat_R = complexDivision(complexSub(C1,C2),K);console.log("Iaat_R",Iaat_R);
-Ibat_R = complexDivision(complexSub(complexMultiplication(a2,C1),complexMultiplication(a,C2)),K);console.log("Ibat_R",Ibat_R);
-Icat_R = complexDivision(complexSub(complexMultiplication(a,C1),complexMultiplication(a2,C2)),K);console.log("Icat_R",Icat_R);
+
+Iaat_R = complexDivision(complexSub(C1,C2),K);
+Ibat_R = complexDivision(complexSub(complexMultiplication(a2,C1),complexMultiplication(a,C2)),K);
+Icat_R = complexDivision(complexSub(complexMultiplication(a,C1),complexMultiplication(a2,C2)),K);
 
 Ia_bat_R = complexDivision(complexAdd(complexMultiplication(I_a2,C1),complexMultiplication(a_I,C2)),K);
 Ib_cat_R = complexDivision(complexMultiplication(a2_a,complexAdd(C1,C2)),K);
@@ -102,11 +101,6 @@ Vc_aat_R = complexDivision(complexAdd(complexMultiplication(a_I,complexAdd(Z_F1,
 Za_bat_R = complexDivision(Va_bat_R,Ia_bat_R);
 Zb_cat_R = complexDivision(Vb_cat_R,Ib_cat_R);
 Zc_aat_R = complexDivision(Vc_aat_R,Ic_aat_R);
-
-
-console.log("ZAB",complexMultiplication(h,Z_L1),"secind term",complexDivision(complexMultiplication3({x:-1,y:0},a,Z_F),C1),"third term",complexDivision(complexMultiplication3({x:-1,y:0},{x:Math.sqrt(3),y:0},Z2),C1));
-console.log("ZBC",complexMultiplication(h,Z_L1),"secind term",complexDivision(complexMultiplication({x:1/2,y:0},Z_F),C1));
-console.log("ZCA",complexMultiplication(h,Z_L1),"secind term",complexDivision(complexMultiplication3({x:-1,y:0},a2,Z_F),C1),"third term",complexDivision(complexMultiplication3({x:1,y:0},{x:Math.sqrt(3),y:0},Z2),C1));
 
 // for bc fault Set to 0
 Zaat_R = {x:0,y:0};

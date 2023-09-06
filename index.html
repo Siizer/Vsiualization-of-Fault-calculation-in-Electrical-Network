@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="Zsvg.svg">
+	<link rel="icon" type="image/svg+xml" href="Zsvg.svg">
     <title>Three-Phase Electrical System Visualization</title>
     <script src="d3.v7.min.js"></script>
-    <script src="katex.min.js"></script>
-    <link rel="stylesheet" href="katex.min.css">
+    <!-- <script src="katex.min.js"></script> -->
+    <!-- <link rel="stylesheet" href="katex.min.css"> -->
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -25,54 +25,69 @@
 
 					</div>
 					<div class="applyFault" style="border-left:2px solid lightgrey;">
-						<div class="checkboxFaultTypeGroup" style="display: grid;grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;">
+						<div class="checkboxFaultTypeGroup" style="display: grid;grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;">
 							<div class="labelButton" style="margin-left: 10px; flex;align-items: center;"><label for="myButton">Apply Fault:</label></div>
 							<div class="button-container" style="display:flex;align-items:center;">
 								<button id="toggleButton" class="faultControlsButton" onclick="toggleButton()">OFF</button>
 							</div>
 							<div class="faultControlsDiv" style="display: flex;align-items: center;">
-								<input id="faultType3Ph" class="faultControls checkBoxfaultControls" type="checkbox" name="3Ph" value="3Ph" style="width:auto;" onclick="handleCheckboxClick(this)"  disabled>
+								<input id="faultType3Ph" class="faultControls checkBoxfaultControls" type="checkbox" name="3Ph" value="3Ph" style="width:auto;"  disabled>
 								<label for="3Ph">3Ph</label>
 							</div>
 							<div class="faultControlsDiv" style="display: flex;align-items: center;">
-								<input id="faultType2Ph" class="faultControls checkBoxfaultControls" type="checkbox" name="2Ph" value="2Ph" style="width:auto;" onclick="handleCheckboxClick(this)" disabled>
+								<input id="faultType2Ph" class="faultControls checkBoxfaultControls" type="checkbox" name="2Ph" value="2Ph" style="width:auto;" disabled>
 								<label for="2Ph">2Ph</label>
 							</div>
 							<div class="faultControlsDiv"  style="display: flex;align-items: center;">
-								<input id="faultType2Ph_G" class="faultControls checkBoxfaultControls" type="checkbox" name="2Ph-G" value="2Ph-G" style="width:auto;" onclick="handleCheckboxClick(this)" disabled>
+								<input id="faultType2Ph_G" class="faultControls checkBoxfaultControls" type="checkbox" name="2Ph-G" value="2Ph-G" style="width:auto;" disabled>
 								<label for="2Ph-G">2Ph-G</label>
 							</div>
 							<div class="faultControlsDiv" style="display: flex;align-items: center;">
-								<input id="faultType1Ph" class="faultControls checkBoxfaultControls" type="checkbox" name="1Ph" value="1Ph" style="width:auto;" onclick="handleCheckboxClick(this)" disabled>
+								<input id="faultType1Ph" class="faultControls checkBoxfaultControls" type="checkbox" name="1Ph" value="1Ph" style="width:auto;" disabled>
 								<label for="1Ph">1Ph</label>	
+							</div>	
+							<div class="btnToggleRX_Atheta" style="display: flex;align-items: center;">
+								<button id="toggleDisplayValues" class="btnCoordinate" style="width: 50px;">r<u>&nbsp;&frasl;&theta;º</u></button>
 							</div>		
 						</div>
-						<div id="fieldsets"  style="font-size: 1rem;border:none;display: grid;grid-template-columns: 1fr 1fr;">
-							<fieldset id="faultCalculationResult_V" style="border:none;">
+						<hr style="height: 1px; background-color: #ccc; border: none;">
+						<div id="fieldsets"  style="font-size: 0.9rem;border:none;display: grid;grid-template-columns: 1fr 1fr 1fr 1fr;"> 
+							<fieldset id="faultCalculationResult_V" style="border:none;margin:0;justify-self:center;padding:0;">
 								<legend >
 									
 								</legend>
 							</fieldset>
-							<fieldset id="faultCalculationResult_I" style="border:none;">
+							<fieldset id="faultCalculationResult_VPh" style="border:none;margin:0;justify-self:center;padding:0;">
+								<legend >
+									
+								</legend>
+							</fieldset>
+							<fieldset id="faultCalculationResult_I" style="border:none;margin:0;justify-self:center;padding:0;">
+								<legend >
+									
+								</legend>
+							</fieldset>
+							<fieldset id="faultCalculationResult_IPh" style="border:none;margin:0;justify-self:center;padding:0;">
 								<legend >
 									
 								</legend>
 							</fieldset>
 						</div>
-						<div id="fieldsetsImpedances"  style="font-size: 1rem;display: grid;grid-template-columns: 1fr 1fr ;">
-							<fieldset id="faultCalculationResult_Z" style="border:none;">
+						<hr style="height: 1px; background-color: #ccc; border: none;">
+						<div id="fieldsetsImpedances"  style="font-size: 0.9rem;display: grid;grid-template-columns: 1fr 1fr ;">
+							<fieldset id="faultCalculationResult_Z" style="border:none;justify-self:center;">
 								<legend >
 									
 								</legend>
 							</fieldset>
-							<fieldset id="faultCalculationResult_Z_Ph_Ph" style="border:none;">
+							<fieldset id="faultCalculationResult_Z_Ph_Ph" style="border:none;justify-self:center;">
 								<legend >
 									
 								</legend>
 							</fieldset>
 						</div>
-						<div id="fieldsetsTransition"  style="font-size: 1rem;display: grid;grid-template-columns: 1fr ;">
-							<fieldset id="faultCalculationResult_Transition" style="border:none;">
+						<div id="fieldsetsTransition"  style="font-size: 0.9rem;display: grid;grid-template-columns: 1fr ;">
+							<fieldset id="faultCalculationResult_Transition" style="border:none;justify-self:center;">
 								<legend >
 									
 								</legend>
@@ -104,46 +119,48 @@
 	<script>
 var maxStatus=3;
 var toDelete;
+var cartesianFaultApply = true
+
 function complexMultiplication(a, b) {  return { x: a.x * b.x - a.y * b.y, y: a.x * b.y + a.y * b.x }; }
 //--------- Var declaration
 
-// var Voltage = 100; var lineLength = 100; var Sb = 100; var Z_b = Voltage*Voltage/Sb; var distanceToFault = 100;
+var Voltage = 100; var lineLength = 100; var Sb = 100; var Z_b = Voltage*Voltage/Sb; var distanceToFault = 50;
 
-// var Z1x = 0; var Z1y = 3 //Q/mile
-// var Z0x = 0; var Z0y = 6 //Q/mile
+var Z1x = 0; var Z1y = 3 //Q/mile
+var Z0x = 0; var Z0y = 3 //Q/mile
 
-// var h = {x:distanceToFault/100,y:0}; var I_h = {x:1-distanceToFault/100,y:0};
-//            var Z_F = {x:0,y:0};
+var h = {x:distanceToFault/100,y:0}; var I_h = {x:1-distanceToFault/100,y:0};
+            var Z_F = {x:0,y:0};
 
-//			var Z_L1 = {x:lineLength*Z1x/Z_b,y:lineLength*Z1y/Z_b}; var Z_L2 = {x:lineLength*Z1x/Z_b,y:lineLength*Z1y/Z_b};  var Z_L0 = {x:lineLength*Z0x/Z_b,y:lineLength*Z0y/Z_b};  
+			var Z_L1 = {x:lineLength*Z1x/Z_b,y:lineLength*Z1y/Z_b}; var Z_L2 = {x:lineLength*Z1x/Z_b,y:lineLength*Z1y/Z_b};  var Z_L0 = {x:lineLength*Z0x/Z_b,y:lineLength*Z0y/Z_b};  
             
-//            var Z_E = {x:0,y:2}; var Z_E1 = {x:0,y:2};var Z_E2 = {x:0,y:2}; var Z_E0 = {x:0,y:8};
+            var Z_E = {x:0,y:2}; var Z_E1 = {x:0,y:2};var Z_E2 = {x:0,y:2}; var Z_E0 = {x:0,y:2};
 
-//			var Z_S =  {x:0,y:3}; var Z_S1 = {x:0,y:3}; var Z_S2 =  {x:0,y:3}; var Z_S0 = {x:0,y:6};
+			var Z_S =  {x:0,y:3}; var Z_S1 = {x:0,y:3}; var Z_S2 =  {x:0,y:3}; var Z_S0 = {x:0,y:3};
 			
-//			var Z_U = {x:10000,y:10000}; var Z_U1 = {x:10000,y:10000}; var Z_U2 = {x:10000,y:10000}; var Z_U0 = {x:10000,y:10000};
+			var Z_U = {x:0,y:2}; var Z_U1 = {x:0,y:2}; var Z_U2 = {x:0,y:2}; var Z_U0 = {x:0,y:2};
 
-//            var E_F = {x:1,y:0}; 
+            var E_F = {x:1,y:0}; 
 
 //------------------------
 
- var Voltage = 161; var lineLength = 100; var Sb = 100; var Z_b = Voltage*Voltage/Sb; var distanceToFault = 70;
+// var Voltage = 161; var lineLength = 100; var Sb = 100; var Z_b = Voltage*Voltage/Sb; var distanceToFault = 70;
 
- var Z1x = 0.2799; var Z1y = 0.6671 //Q/mile
- var Z0x = 0.5657; var Z0y = 2.4850 //Q/mile
+// var Z1x = 0.2799; var Z1y = 0.6671 //Q/mile
+// var Z0x = 0.5657; var Z0y = 2.4850 //Q/mile
 
- var h = {x:distanceToFault/100,y:0}; var I_h = {x:1-distanceToFault/100,y:0};
-             var Z_F = {x:0.04,y:0};
+// var h = {x:distanceToFault/100,y:0}; var I_h = {x:1-distanceToFault/100,y:0};
+//             var Z_F = {x:0.04,y:0};
 
- 			var Z_L1 = {x:lineLength*Z1x/Z_b,y:lineLength*Z1y/Z_b}; var Z_L2 = {x:lineLength*Z1x/Z_b,y:lineLength*Z1y/Z_b};  var Z_L0 = {x:lineLength*Z0x/Z_b,y:lineLength*Z0y/Z_b};  
+// 			var Z_L1 = {x:lineLength*Z1x/Z_b,y:lineLength*Z1y/Z_b}; var Z_L2 = {x:lineLength*Z1x/Z_b,y:lineLength*Z1y/Z_b};  var Z_L0 = {x:lineLength*Z0x/Z_b,y:lineLength*Z0y/Z_b};  
             
-             var Z_E = {x:0.2,y:0.5}; var Z_E1 = {x:0.2,y:0.5};var Z_E2 = {x:0.2,y:0.5}; var Z_E0 = {x:0.40,y:2.0};
+//             var Z_E = {x:0.2,y:0.5}; var Z_E1 = {x:0.2,y:0.5};var Z_E2 = {x:0.2,y:0.5}; var Z_E0 = {x:0.40,y:2.0};
 
- 			var Z_S =  {x:0.002,y:0.005}; var Z_S1 = {x:0.002,y:0.005}; var Z_S2 =  {x:0.002,y:0.005}; var Z_S0 = {x:0.004,y:0.010};
+// 			var Z_S =  {x:0.002,y:0.005}; var Z_S1 = {x:0.002,y:0.005}; var Z_S2 =  {x:0.002,y:0.005}; var Z_S0 = {x:0.004,y:0.010};
 			
- 			var Z_U = {x:0.003,y:0.006}; var Z_U1 = {x:0.003,y:0.006}; var Z_U2 = {x:0.003,y:0.006}; var Z_U0 = {x:0.006,y:0.012};
+// 			var Z_U = {x:0.003,y:0.006}; var Z_U1 = {x:0.003,y:0.006}; var Z_U2 = {x:0.003,y:0.006}; var Z_U0 = {x:0.006,y:0.012};
 
-             var E_F = {x:1,y:0}; 
+//             var E_F = {x:1,y:0}; 
                 
             var Zl = {};
             var Zj = {};
@@ -224,40 +241,55 @@ function complexMultiplication(a, b) {  return { x: a.x * b.x - a.y * b.y, y: a.
 	//	svgSingleDiagram_g.attr("transform", "translate(" + MoveDiagramRight + ", " + MoveDiagramDow + ")");
 //-------------------------
 
-		var checkedValue = "";
+		// var checkedValue = "";
+		// var hasToggled = false;
+		// var mjsSelect = "'./"+checkedValue+"Fault_at_F.mjs'";
 
-		var mjsSelect = "'./"+checkedValue+"Fault_at_F.mjs'";
+		// Function to handle checkbox clicks
+		function handleCheckboxClick(event) {
 
-		function handleCheckboxClick(checkbox) {
+		const checkbox = event.target;
+
 		if (checkbox.checked) {
 			// Uncheck all other checkboxes
-
 			checkedValue = checkbox.value;
-			uncheckOtherCheckboxes(checkbox);// Call the displayCheckedValue function
+
+			uncheckOtherCheckboxes(checkbox);
 			displayCheckedValue();
 		}
-		}
-		
-		// Get the initially checked checkbox value
-		var initiallyCheckedCheckbox = document.querySelector('input[type="checkbox"]:checked');
-		if (initiallyCheckedCheckbox) {
-			checkedValue = initiallyCheckedCheckbox.value; // Assign initial value to global variable
+		hasToggled = true;
+
+		return hasToggled;
 		}
 
+		// Function to uncheck other checkboxes
 		function uncheckOtherCheckboxes(checkbox) {
-		var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+		const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 		checkboxes.forEach(function (cb) {
 			if (cb !== checkbox) {
 			cb.checked = false;
 			}
 		});
 		}
-		// Example usage of the global checkedValue
-		function displayCheckedValue() {
 
-			mjsSelect = "'./"+checkedValue+"Fault_at_F.mjs'";
+		// Function to display the checked value
+		function displayCheckedValue() {
+		mjsSelect = "'./" + checkedValue + "Fault_at_F.mjs'";
+	
 
 		}
+
+		// Attach event listeners to checkboxes
+		const checkboxes = document.querySelectorAll('.checkBoxfaultControls');
+		checkboxes.forEach(function(checkbox) {
+		checkbox.addEventListener('click', handleCheckboxClick);
+		});
+
+		// Initially checked checkbox
+		const initiallyCheckedCheckbox = document.querySelector('input[type="checkbox"]:checked');
+		var checkedValue = initiallyCheckedCheckbox ? initiallyCheckedCheckbox.value : "";
+
+		let hasToggled = false;
 
 		var toggleButtonValue = "OFF";
 
@@ -283,7 +315,7 @@ function complexMultiplication(a, b) {  return { x: a.x * b.x - a.y * b.y, y: a.
 				button.innerText = 'OFF';
 				button.classList.remove('on');
 				toggleButtonValue = button.innerText;
-				console.log("buttonvalue ON", toggleButtonValue);
+				
 				document.querySelectorAll('.faultControls').forEach(function (checkbox) {
 					checkbox.disabled = true;
 				});
@@ -343,7 +375,7 @@ function complexMultiplication(a, b) {  return { x: a.x * b.x - a.y * b.y, y: a.
 
 		let maxSize = Math.max(svgWidth,svgHeight);
 		let factor = svgHeight/svgWidth;
-		var faultType = "3Ph";
+		// var faultType = "3Ph";
 
 		
 		// Create scales
@@ -401,8 +433,8 @@ function complexMultiplication(a, b) {  return { x: a.x * b.x - a.y * b.y, y: a.
 			VB: {x: -1, y: -Math.sqrt(3)},
 			VC: {x: -1, y: +Math.sqrt(3)},
 			IA: {x: 1, y: 0},
-			IB: {x: -0.5, y: -0.8660254037844386},
-			IC: {x: -0.5, y: +0.8660254037844386},
+			IB: {x: -0.5, y: -Math.sqrt(3)/2},
+			IC: {x: -0.5, y: +Math.sqrt(3)/2},
 			ZA: {x: 2, y: 0},
 			ZB: {x: 2, y: 0},
 			ZC: {x: 2, y:0},
@@ -438,6 +470,6 @@ function complexMultiplication(a, b) {  return { x: a.x * b.x - a.y * b.y, y: a.
 
 	</script>
     <script type="module" src="index.js" defer></script>
-    <script src="SingleLine.js" defer></script>
+    <script src="SingleLine.js" defer ></script>
 </body>
 </html>

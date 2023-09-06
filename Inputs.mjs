@@ -14,7 +14,7 @@ export function Inputs (SelectInputFieldsID,classForTable,SelectInputFieldsClass
     .text("R/X").style('font-size', '0.8rem')
     .attr("class", "myButtonCurrentAndVoltagePanel") // optional: add a class for styling
     .on("click", function() {
-      let tableToHide = document.getElementsByClassName(classForTable);
+      let tableToHide = document.getElementsByClassName(classForTable);console.log("classForTable",classForTable);
       tableToHide.style("display","none");
     });
     header.append("th").text("R");
@@ -39,7 +39,7 @@ export function Inputs (SelectInputFieldsID,classForTable,SelectInputFieldsClass
       let elementImaginary =document.getElementById(d.key+"-imaginary")
       let boundingBoxReal = elementReal.getBoundingClientRect()
       let boundingBoxImaginary = elementImaginary.getBoundingClientRect()
-      console.log("boundingreal",boundingBoxReal);
+
         // Create tooltip element
         const tooltip = d3.selectAll(".CurrentAndVoltageTable")
           .append("div")
@@ -79,7 +79,7 @@ export function Inputs (SelectInputFieldsID,classForTable,SelectInputFieldsClass
         }
         }})
       .on("input", onInputChanged)
-      .on("change", onInputChanged);
+      // .on("change", onInputChanged);
     
     // Add third column with imaginary input fields
     inputFields.append("td")
@@ -101,7 +101,7 @@ export function Inputs (SelectInputFieldsID,classForTable,SelectInputFieldsClass
         }
         }})
       .on("input", onInputChanged)
-      .on("change", onInputChanged);
+      // .on("change", onInputChanged);
 
     return inputDiv;
 }
@@ -142,7 +142,7 @@ export function InputsTopLeft (SelectInputFieldsID,classForTable,SelectInputFiel
     .style('font-size', '1rem')
     .style("text-align","end")
     .on("input", onInputChanged)
-    .on("change", onInputChanged);
+    // .on("change", onInputChanged);
 
   return inputDiv;
 }

@@ -4,6 +4,7 @@
 import { complexAdd,complexSub, complexAdd3, complexAdd4, complexInverse, complexDivision, complexMultiplication, complexMultiplication3, a, a2, _a, _a2, _I, I, a_a2, a2_a, a_I, I_a, I_a2, a2_I, O, d0, d1, d2, _d0, _d1, _d2, Seq_012 } from "./ComplexOperatorAid.mjs";
 
 export function Ph_G() {
+
 Z_L1 = {x:lineLength*Z1x/Z_b,y:lineLength*Z1y/Z_b}; Z_L2 = {x:lineLength*Z1x/Z_b,y:lineLength*Z1y/Z_b};Z_L0 = {x:lineLength*Z0x/Z_b,y:lineLength*Z0y/Z_b};
 Z_Fx3 = complexMultiplication(III,Z_F)
 
@@ -37,8 +38,6 @@ Z_Fx3 = complexMultiplication(III,Z_F)
                 complexDivision(I,complexAdd3(Z_S0,Z_E0,Z_U0)),
                 complexMultiplication(Z_E0,Z_U0));
             
-      
-                console.log("the 0 Z's, Zl",Zl0,"zj",Zj0,"zk",Zk0);
 //LEFT BRANCH
 Z_M1 = complexAdd(Zj1,complexMultiplication(h,Z_L1));
 //RIGHT BRANCH
@@ -77,18 +76,13 @@ if (isNaN(Z0.x) && isNaN(Z0.y)) {
     Z0 = {x: 0, y: 0};
   }
 
-
-  console.log("Z1",Z1,"Z2",Z2,"Z0",Z0);
-
 C0 = complexDivision(complexMultiplication(I,Z_N0),complexAdd(Z_M0,Z_N0));
 if (isNaN(C0.x) && isNaN(C0.y)) {
     C0 = {x: 0, y: 0};
   }
 
-  console.log("C1",C1,"C2",C2,"C0",C0);
 K = complexDivision(complexAdd4(Z0,Z1,Z2,Z_Fx3),E_F);
-console.log("K",K);
-console.log("1/K",complexInverse(K));
+
 Z_F0 = complexAdd(Z_F,complexMultiplication3(h,Z_L0,C0));
 Z_F1 = complexAdd(Z_F,complexMultiplication3(h,Z_L1,C1));
 Z_F2 = complexAdd(Z_F,complexMultiplication3(h,Z_L2,C2));
@@ -125,7 +119,7 @@ Ia0at_R = complexDivision(C0,K);
 Ia1at_R = complexDivision(C1,K);
 Ia2at_R = complexDivision(C2,K);
 
-Iaat_R = complexDivision(complexAdd3(C0,C1,C2),K);console.log("Iaat_R",Iaat_R);
+Iaat_R = complexDivision(complexAdd3(C0,C1,C2),K);
 Ibat_R = complexDivision(complexAdd3(C0,complexMultiplication(a2,C1),complexMultiplication(a,C2)),K);
 Icat_R = complexDivision(complexAdd3(C0,complexMultiplication(a,C1),complexMultiplication(a2,C2)),K);
 

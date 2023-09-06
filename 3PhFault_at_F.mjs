@@ -6,7 +6,6 @@ import { PI_to_Y,convertToPolar, convertToCartesian, complexAdd,complexSub, comp
 
 export function ThreePhaseFault() { 
 
-
 Z_L1 = {x:lineLength*Z1x/Z_b,y:lineLength*Z1y/Z_b}; Z_L2 = {x:lineLength*Z1x/Z_b,y:lineLength*Z1y/Z_b};
 
             Zl = complexMultiplication(
